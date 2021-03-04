@@ -23,6 +23,8 @@ WORK_DIR=${1-$(pwd)}
 run_checkov() {
   local test_dir=$1
    docker run -t -v "${test_dir}":/tf bridgecrew/checkov:release-1.0.235 -d /tf
+   checkov -d "${test_dir}":/tf -o json
+   checkov -d "${test_dir}":/tf -o junitxml
 }
 
 #######################################

@@ -53,7 +53,7 @@ stages:
           command: plan
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
-          commandOptions: -var location=$(azureLocation) -out= tfplan.json
+          commandOptions: -var location=$(azureLocation) -out=terraform.tfplan
       - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
         displayName: 'Run terraform show'
         inputs:

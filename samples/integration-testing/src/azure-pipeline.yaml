@@ -53,10 +53,15 @@ stages:
           command: plan
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
-          commandOptions: -var location=$(azureLocation) 
+          commandOptions: -var location=$(azureLocation) -out= tfplan.json
       - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
         displayName: 'Run terraform show'
         inputs:
           command: 'show'
           commandOptions: '-json'
           allowTelemetryCollection: true
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'

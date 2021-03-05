@@ -54,18 +54,18 @@ stages:
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
           commandOptions: -var location=$(azureLocation) -out=terraform.tfplan
-
+      - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+        displayName: 'Terraform Show'
+        inputs:
+          command: 'show'
+          commandOptions: '-json terraform.tfplan'
+          allowTelemetryCollection: true
       - task: CopyFiles@2
         inputs:
           SourceFolder: '$(terraformWorkingDirectory)'
           Contents: '**'
           TargetFolder: '$(Build.ArtifactStagingDirectory)/terraform'
-      - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
-        displayName: 'Run terraform show'
-        inputs:
-          command: 'show'
-          commandOptions: '-json $(Build.ArtifactStagingDirectory)/terraform/terraform.tfplan'
-          allowTelemetryCollection: true
+
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform'

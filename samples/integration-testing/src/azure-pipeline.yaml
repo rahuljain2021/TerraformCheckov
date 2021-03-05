@@ -58,7 +58,7 @@ stages:
         displayName: 'Terraform Show'
         inputs:
           command: 'show'
-          commandOptions: '-json terraform.tfplan'
+          commandOptions: '-json $(terraformWorkingDirectory)/terraform.tfplan'
           allowTelemetryCollection: true
       - task: CopyFiles@2
         inputs:

@@ -58,5 +58,5 @@ stages:
         displayName: 'Run terraform show'
         inputs:
           command: 'show'
-          commandOptions: '-json tfplan.json'
+          commandOptions: '-json'
           allowTelemetryCollection: true

@@ -58,7 +58,7 @@ stages:
         displayName: 'Run terraform show'
         inputs:
           command: 'show'
-          commandOptions: '-json'
+          commandOptions: '-json terraform.tfplan'
           allowTelemetryCollection: true
       - task: PublishBuildArtifacts@1
         inputs:

@@ -53,4 +53,9 @@ stages:
           command: plan
           workingDirectory: $(terraformWorkingDirectory)
           environmentServiceName: $(serviceConnection)
-          commandOptions: -var location=$(azureLocation)
+          commandOptions: -var location=$(azureLocation) --out tfplan.binary
+      - task: TerraformCLI@0
+        inputs:
+          command: 'show'
+          commandOptions: '-json tfplan.binary > tfplan.json'
+          allowTelemetryCollection: true

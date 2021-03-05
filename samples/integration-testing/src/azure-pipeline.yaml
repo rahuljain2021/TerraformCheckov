@@ -59,9 +59,14 @@ stages:
       #   inputs:
       #     command: 'show'
       #     commandOptions: '-json terraform.tfplan'
-      #     allowTelemetryCollection: true
+      #     allowTelemetryCollection: true.
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: '$(terraformWorkingDirectory)'
+          Contents: '**'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/terrafrom'
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/terrafrom'
           ArtifactName: 'drop'
           publishLocation: 'Container'
